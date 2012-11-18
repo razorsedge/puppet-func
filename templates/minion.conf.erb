@@ -1,0 +1,19 @@
+###
+### File managed by Puppet
+###
+# configuration for minions
+
+[main]
+log_level = INFO
+acl_dir = /etc/func/minion-acl.d
+
+listen_addr = <%= listen_addr %>
+listen_port = 51234
+minion_name =
+method_log_dir = /var/log/func/methods/
+<% if use_puppet_certs -%>
+use_certmaster = 0
+cert_file = <%= puppetmaster_ssl_dir %>/ssl/certs/<%= fqdn.downcase %>.pem
+key_file = <%= puppetmaster_ssl_dir %>/ssl/private_keys/<%= fqdn.downcase %>.pem
+ca_file = <%= puppetmaster_ssl_dir %>/ssl/certs/ca.pem
+<% end %>
