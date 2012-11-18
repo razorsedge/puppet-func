@@ -82,6 +82,7 @@ class func::minion (
   $service_hasstatus    = $func::params::service_hasstatus
 ) inherits func::params {
   # Validate our booleans
+  validate_bool($use_puppet_certs)
   validate_bool($service_enable)
   validate_bool($service_hasrestart)
   validate_bool($service_hasstatus)

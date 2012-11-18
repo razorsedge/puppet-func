@@ -33,6 +33,8 @@ describe 'func::overlord', :type => 'class' do
     it 'should contain File[/etc/func/overlord.conf] with contents "# configuration for overlord"' do
       verify_contents(subject, '/etc/func/overlord.conf', [ '# configuration for overlord', ])
     end
+    # TODO: negate verify_contents
+    it { should_not contain_file('/etc/func/overlord.conf').with_content(/^puppet_minions = True$/) }
     it { should contain_file('/etc/func/groups').with(
       :ensure => 'present',
       :mode   => '0644',

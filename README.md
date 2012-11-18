@@ -1,4 +1,4 @@
-FUNC Module
+Func Module
 ===========
 
 master branch: [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-func.png?branch=master)](http://travis-ci.org/razorsedge/puppet-func)
@@ -7,7 +7,7 @@ develop branch: [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-
 Introduction
 ------------
 
-This module manages the installation and configuration of [FUNC](https://fedorahosted.org/func/).
+This module manages the installation and configuration of [Func: Fedora Unified Network Controller](https://fedorahosted.org/func/).
 Func allows for running commands on remote systems in a secure way, like SSH, but offers several improvements.
 
 Actions:
@@ -64,7 +64,8 @@ Issues
 TODO
 ----
 
-* None
+* Autopopulate the Func group file (possibly with exported resources?).
+* Figure out how to negate the call to verify_contents in puppet-rspec tests in order to make sure that content is *missing* from a template.
 
 License
 -------

@@ -1,19 +1,19 @@
 Contributing
-============
+------------
 
 normal
 
   1. [Fork](http://help.github.com/forking/) puppet-func
-  2. Create a topic branch `git checkout -b my_branch`
+  2. Create a topic branch against the develop branch `git checkout develop; git checkout -b my_branch`
   3. Push to your branch `git push origin my_branch`
-  4. Create a [Pull Request](http://help.github.com/pull-requests/) from your branch
+  4. Create a [Pull Request](http://help.github.com/pull-requests/) from your branch against the develop branch
 
-git-flow
+[git-flow](https://github.com/nvie/gitflow)
 
   1. [Fork](http://help.github.com/forking/) puppet-func
   2. Create a feature `git flow feature start my-feature`
   3. Publish your featue `git flow feature publish my-feature`
-  4. Create a [Pull Request](http://help.github.com/pull-requests/) from your branch
+  4. Create a [Pull Request](http://help.github.com/pull-requests/) from your branch against the develop branch
 
 Testing
 -------

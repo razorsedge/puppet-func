@@ -30,9 +30,15 @@ describe 'func::minion', :type => 'class' do
       :owner  => 'root',
       :group  => 'root'
     )}
-    it 'should contain File[/etc/func/minion.conf] with contents "listen_addr = "' do
+    it 'should contain File[/etc/func/minion.conf] with content matching "listen_addr = "' do
       verify_contents(subject, '/etc/func/minion.conf', [ 'listen_addr = ', ])
     end
+#    it { should contain_file('/etc/func/minion.conf').with_content(/^listen_addr = $/) }
+    # TODO: negate verify_contents
+#    it 'should contain File[/etc/func/minion.conf] without contents "use_certmaster = 0"' do
+#      not(verify_contents(subject, '/etc/func/minion.conf', [ 'use_certmaster = 0', ]))
+#    end
+    it { should_not contain_file('/etc/func/minion.conf').with_content(/^use_certmaster = 0$/) }
     it { should contain_service('funcd').with(
       :ensure     => 'running',
       :enable     => true,

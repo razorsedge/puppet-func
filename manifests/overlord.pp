@@ -54,6 +54,8 @@ class func::overlord (
   $file_name            = $func::params::overlord_file_name,
   $group_file_name      = $func::params::group_file_name
 ) inherits func::params {
+  # Validate our booleans
+  validate_bool($use_puppet_certs)
 
   case $ensure {
     /(present)/: {
