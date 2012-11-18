@@ -33,7 +33,7 @@ describe 'func::minion', :type => 'class' do
     it 'should contain File[/etc/func/minion.conf] with contents "listen_addr = "' do
       verify_contents(subject, '/etc/func/minion.conf', [ 'listen_addr = ', ])
     end
-    it { should contain_service('func').with(
+    it { should contain_service('funcd').with(
       :ensure     => 'running',
       :enable     => true,
       :hasrestart => true,
@@ -56,7 +56,7 @@ describe 'func::minion', :type => 'class' do
       }
       end
       it { should contain_file('/etc/func/minion.conf').with_ensure('absent') }
-      it { should contain_service('func').with(
+      it { should contain_service('funcd').with(
         :ensure => 'stopped',
         :enable => false
       )}
@@ -109,7 +109,7 @@ describe 'func::minion', :type => 'class' do
         :service_enable => false
       }
       end
-      it { should contain_service('func').with(
+      it { should contain_service('funcd').with(
         :ensure => 'stopped',
         :enable => false
       )}

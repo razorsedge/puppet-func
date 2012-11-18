@@ -100,7 +100,7 @@ class func::params {
       $minion_file_name   = '/etc/func/minion.conf'
       $overlord_file_name = '/etc/func/overlord.conf'
       $group_file_name    = '/etc/func/groups'
-      $service_name       = 'func'
+      $service_name       = 'funcd'
     }
     default: {
       fail("Unsupported platform: ${::osfamily}")
