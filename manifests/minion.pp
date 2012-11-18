@@ -1,11 +1,79 @@
-# Class: func::minion
+# == Class: func::minion
+#
+# This module handles configuring a func minion.  This module requires
+# func version 0.27 or newer and can configure func to use puppet certificates.
+#
+# === Parameters:
+#
+# [*listen_addr*]
+#   The IP address on which the master will listen.
+#   Default: empty (ie all available interfaces)
+#
+# [*use_puppet_certs*]
+#   Whether to use existing Puppet certificates or use Certmaster.
+#   Default: false
+#
+# [*puppetmaster_ssl_dir*]
+#   Directory in which to locate Puppet SSL certificates.
+#   Default: /var/lib/puppet
+#
+# [*ensure*]
+#   Ensure if present or absent.
+#   Default: present
+#
+# [*file_name*]
+#   Name of the minion config file.
+#   Only set this if your platform is not supported or you know what you are
+#   doing.
+#   Default: auto-set, platform specific
+#
+# [*service_ensure*]
+#   Ensure if service is running or stopped.
+#   Default: running
+#
+# [*service_name*]
+#   Name of the service
+#   Only set this if your platform is not supported or you know what you are
+#   doing.
+#   Default: auto-set, platform specific
+#
+# [*service_enable*]
+#   Start service at boot.
+#   Default: true
+#
+# [*service_hasrestart*]
+#   Service has restart command.
+#   Default: true
+#
+# [*service_hasstatus*]
+#   Service has status command.
+#   Only set this if your platform is not supported or you know what you are
+#   doing.
+#   Default: true
+#
+# === Actions:
+#
+# Configures the func minion.conf and func service.
+#
+# === Sample Usage:
+#
+#   class { 'func::minion':
+#     use_puppet_certs => true,
+#   }
+#
+# === Authors
+#
+# Mike Arnold <mike@razorsedge.org>
+#
+# === Copyright
+#
+# Copyright (C) 2012 Mike Arnold, unless otherwise noted.
 #
 class func::minion (
   $listen_addr          = $func::params::listen_addr,
   $use_puppet_certs     = $func::params::use_puppet_certs,
   $puppetmaster_ssl_dir = $func::params::puppetmaster_ssl_dir,
   $ensure               = $func::params::ensure,
-  $package_name         = $func::params::package_name,
   $file_name            = $func::params::minion_file_name,
   $service_ensure       = $func::params::service_ensure,
   $service_name         = $func::params::service_name,
