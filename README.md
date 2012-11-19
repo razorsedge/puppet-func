@@ -1,21 +1,24 @@
-func Module
-===============
+Func Module
+===========
 
-[![Build Status](https://secure.travis-ci.org/razorsedge/puppet-func.png?branch=master)](http://travis-ci.org/razorsedge/puppet-func)
+master branch: [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-func.png?branch=master)](http://travis-ci.org/razorsedge/puppet-func)
+develop branch: [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-func.png?branch=develop)](http://travis-ci.org/razorsedge/puppet-func)
 
 Introduction
 ------------
 
-This module ....
+This module manages the installation and configuration of [Func: Fedora Unified Network Controller](https://fedorahosted.org/func/).
+Func allows for running commands on remote systems in a secure way, like SSH, but offers several improvements.
 
 Actions:
 
-* None
+* Installs the func package.
+* Manages the overlord.conf and minion.conf files.
+* Starts the func service.
 
 OS Support:
 
-* RedHat family - tested on CentOS 5.5+ and CentOS 6.2+
-* SuSE family   - presently unsupported (patches welcome)
+* RedHat family - tested on CentOS 5.8+ and CentOS 6.3+
 * Debian family - presently unsupported (patches welcome)
 
 Class documentation is available via puppetdoc.
@@ -23,13 +26,45 @@ Class documentation is available via puppetdoc.
 Examples
 --------
 
-    include 'func'
+    # Top Scope variable (i.e. via Dashboard):
+    $certmaster_use_puppet_certs = true
+    $func_use_puppet_certs = true
+    # Change SSL dir for Puppet Enterprise.
+    $func_puppetmaster_ssl_dir = '/etc/puppetlabs/puppet'
+    include 'certmaster'
+    include 'func::minion'
+
+
+    # Parameterized Class:
+    # minions
+    node default {
+      class { 'certmaster':
+        use_puppet_certs => true,
+      }
+      class { 'func::minion':
+        use_puppet_certs => true,
+      }
+    }
+
+    # overlord
+    node 'overlord.example.com' {
+      class { 'certmaster':
+        use_puppet_certs => true,
+      }
+      class { 'func::minion':
+        use_puppet_certs => true,
+      }
+      class { 'func::overlord':
+        use_puppet_certs => true,
+      }
+    }
 
 
 Notes
 -----
 
-* None
+* Requires the [razorsedge/cetmaster](https://github.com/razorsedge/puppet-certmaster) module even if using Puppet certificate authentication.
+* Requires [EPEL](http://fedoraproject.org/wiki/EPEL) for RedHat family hosts.
 
 Issues
 ------
@@ -39,7 +74,10 @@ Issues
 TODO
 ----
 
-* None
+* Autopopulate the Func group file (possibly with exported resources?).
+* Figure out how to negate the call to verify_contents in puppet-rspec tests in order to make sure that content is *missing* from a template.
+* Add firewall support.
+* Make the Puppet client determine $puppetmaster_ssl_dir.
 
 License
 -------
