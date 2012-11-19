@@ -63,7 +63,6 @@ class func (
   }
 
 #  require smolt
-  include certmaster
   Class['certmaster'] -> Class['func']
 
   package { $package_name :

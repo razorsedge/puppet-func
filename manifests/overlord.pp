@@ -48,7 +48,7 @@
 # Copyright (C) 2012 Mike Arnold, unless otherwise noted.
 #
 class func::overlord (
-  $use_puppet_certs     = $func::params::use_puppet_certs,
+  $use_puppet_certs     = $func::params::safe_use_puppet_certs,
   $puppetmaster_ssl_dir = $func::params::puppetmaster_ssl_dir,
   $ensure               = $func::params::ensure,
   $file_name            = $func::params::overlord_file_name,

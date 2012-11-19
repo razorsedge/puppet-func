@@ -71,7 +71,7 @@
 #
 class func::minion (
   $listen_addr          = $func::params::listen_addr,
-  $use_puppet_certs     = $func::params::use_puppet_certs,
+  $use_puppet_certs     = $func::params::safe_use_puppet_certs,
   $puppetmaster_ssl_dir = $func::params::puppetmaster_ssl_dir,
   $ensure               = $func::params::ensure,
   $file_name            = $func::params::minion_file_name,
@@ -79,7 +79,7 @@ class func::minion (
   $service_name         = $func::params::service_name,
   $service_enable       = $func::params::safe_service_enable,
   $service_hasrestart   = $func::params::safe_service_hasrestart,
-  $service_hasstatus    = $func::params::service_hasstatus
+  $service_hasstatus    = $func::params::safe_service_hasstatus
 ) inherits func::params {
   # Validate our booleans
   validate_bool($use_puppet_certs)

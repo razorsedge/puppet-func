@@ -19,6 +19,7 @@ describe 'func::minion', :type => 'class' do
 
   context 'on a supported operatingsystem, default parameters' do
     let(:params) {{}}
+    let(:pre_condition) { 'class {"certmaster":}' }
     let :facts do {
       :osfamily        => 'RedHat',
       :operatingsystem => 'CentOS'
@@ -48,6 +49,7 @@ describe 'func::minion', :type => 'class' do
   end
 
   context 'on a supported operatingsystem, custom parameters' do
+    let(:pre_condition) { 'class {"certmaster":}' }
     let :facts do {
       :fqdn                   => 'testhost',
       :osfamily               => 'RedHat',

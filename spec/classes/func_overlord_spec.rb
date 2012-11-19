@@ -19,6 +19,7 @@ describe 'func::overlord', :type => 'class' do
 
   context 'on a supported operatingsystem, default parameters' do
     let(:params) {{}}
+    let(:pre_condition) { 'class {"certmaster":}' }
     let :facts do {
       :osfamily        => 'RedHat',
       :operatingsystem => 'CentOS'
@@ -44,6 +45,7 @@ describe 'func::overlord', :type => 'class' do
   end
 
   context 'on a supported operatingsystem, custom parameters' do
+    let(:pre_condition) { 'class {"certmaster":}' }
     let :facts do {
       :osfamily               => 'RedHat',
       :operatingsystem        => 'CentOS',

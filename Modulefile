@@ -10,3 +10,4 @@ description 'A secure, scriptable remote control framework & API.
 Func allows for running commands on remote systems in a secure way, like SSH, but offers several improvements.'
 dependency 'razorsedge/certmaster', '>=0.0.1'
 dependency 'puppetlabs/stdlib', '~2'
+dependency 'stahnma/epel', '>=0.0.1'

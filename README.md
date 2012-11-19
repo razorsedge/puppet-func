@@ -27,14 +27,20 @@ Examples
 --------
 
     # Top Scope variable (i.e. via Dashboard):
+    $certmaster_use_puppet_certs = true
     $func_use_puppet_certs = true
+    # Change SSL dir for Puppet Enterprise.
     $func_puppetmaster_ssl_dir = '/etc/puppetlabs/puppet'
+    include 'certmaster'
     include 'func::minion'
 
 
     # Parameterized Class:
     # minions
     node default {
+      class { 'certmaster':
+        use_puppet_certs => true,
+      }
       class { 'func::minion':
         use_puppet_certs => true,
       }
@@ -42,6 +48,9 @@ Examples
 
     # overlord
     node 'overlord.example.com' {
+      class { 'certmaster':
+        use_puppet_certs => true,
+      }
       class { 'func::minion':
         use_puppet_certs => true,
       }
@@ -54,7 +63,8 @@ Examples
 Notes
 -----
 
-* Requires the razorsedge/cetmaster module even if using Puppet certificate authentication.
+* Requires the [razorsedge/cetmaster](https://github.com/razorsedge/puppet-certmaster) module even if using Puppet certificate authentication.
+* Requires [EPEL](http://fedoraproject.org/wiki/EPEL) for RedHat family hosts.
 
 Issues
 ------
@@ -66,6 +76,8 @@ TODO
 
 * Autopopulate the Func group file (possibly with exported resources?).
 * Figure out how to negate the call to verify_contents in puppet-rspec tests in order to make sure that content is *missing* from a template.
+* Add firewall support.
+* Make the Puppet client determine $puppetmaster_ssl_dir.
 
 License
 -------
