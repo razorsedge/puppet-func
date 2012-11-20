@@ -17,6 +17,16 @@
 #   Ensure if present or absent.
 #   Default: present
 #
+# [*autoupgrade*]
+#   Upgrade package automatically, if there is a newer version.
+#   Default: false
+#
+# [*package_name*]
+#   Name of the package.
+#   Only set this if your platform is not supported or you know what you are
+#   doing.
+#   Default: auto-set, platform specific
+#
 # [*file_name*]
 #   Name of the overlord config file.
 #   Only set this if your platform is not supported or you know what you are
@@ -51,17 +61,27 @@ class func::overlord (
   $use_puppet_certs     = $func::params::safe_use_puppet_certs,
   $puppetmaster_ssl_dir = $func::params::puppetmaster_ssl_dir,
   $ensure               = $func::params::ensure,
+  $autoupgrade          = $func::params::safe_autoupgrade,
+  $package_name         = $func::params::package_name,
   $file_name            = $func::params::overlord_file_name,
   $group_file_name      = $func::params::group_file_name
 ) inherits func::params {
   # Validate our booleans
+  validate_bool($autoupgrade)
   validate_bool($use_puppet_certs)
 
   case $ensure {
     /(present)/: {
+      if $autoupgrade == true {
+        $package_ensure = 'latest'
+      } else {
+        $package_ensure = 'present'
+      }
+
       $file_ensure = 'present'
     }
     /(absent)/: {
+      $package_ensure = 'absent'
       $file_ensure = 'absent'
     }
     default: {
@@ -69,10 +89,14 @@ class func::overlord (
     }
   }
 
-  include func
+  class { 'func':
+    ensure       => $ensure,
+    autoupgrade  => $autoupgrade,
+    package_name => $package_name,
+  }
   Class['func'] -> Class['func::overlord']
 
-  file { $group_file_name :
+  file { $group_file_name:
     ensure  => $file_ensure,
     mode    => '0644',
     owner   => 'root',
@@ -82,7 +106,7 @@ class func::overlord (
 #    require => Package[$package_name],
   }
 
-  file { $file_name :
+  file { $file_name:
     ensure  => $file_ensure,
     mode    => '0644',
     owner   => 'root',
