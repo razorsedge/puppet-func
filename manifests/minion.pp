@@ -21,6 +21,16 @@
 #   Ensure if present or absent.
 #   Default: present
 #
+# [*autoupgrade*]
+#   Upgrade package automatically, if there is a newer version.
+#   Default: false
+#
+# [*package_name*]
+#   Name of the package.
+#   Only set this if your platform is not supported or you know what you are
+#   doing.
+#   Default: auto-set, platform specific
+#
 # [*file_name*]
 #   Name of the minion config file.
 #   Only set this if your platform is not supported or you know what you are
@@ -74,6 +84,8 @@ class func::minion (
   $use_puppet_certs     = $func::params::safe_use_puppet_certs,
   $puppetmaster_ssl_dir = $func::params::puppetmaster_ssl_dir,
   $ensure               = $func::params::ensure,
+  $autoupgrade          = $func::params::safe_autoupgrade,
+  $package_name         = $func::params::package_name,
   $file_name            = $func::params::minion_file_name,
   $service_ensure       = $func::params::service_ensure,
   $service_name         = $func::params::service_name,
@@ -82,6 +94,7 @@ class func::minion (
   $service_hasstatus    = $func::params::safe_service_hasstatus
 ) inherits func::params {
   # Validate our booleans
+  validate_bool($autoupgrade)
   validate_bool($use_puppet_certs)
   validate_bool($service_enable)
   validate_bool($service_hasrestart)
@@ -89,6 +102,12 @@ class func::minion (
 
   case $ensure {
     /(present)/: {
+      if $autoupgrade == true {
+        $package_ensure = 'latest'
+      } else {
+        $package_ensure = 'present'
+      }
+
       if $service_ensure in [ running, stopped ] {
         $service_ensure_real = $service_ensure
         $service_enable_real = $service_enable
@@ -98,6 +117,7 @@ class func::minion (
       $file_ensure = 'present'
     }
     /(absent)/: {
+      $package_ensure = 'absent'
       $service_ensure_real = 'stopped'
       $service_enable_real = false
       $file_ensure = 'absent'
@@ -107,7 +127,11 @@ class func::minion (
     }
   }
 
-  include func
+  class { 'func':
+    ensure       => $ensure,
+    autoupgrade  => $autoupgrade,
+    package_name => $package_name,
+  }
   Class['func'] -> Class['func::minion']
 
   file { $file_name:
@@ -120,7 +144,7 @@ class func::minion (
     notify  => Service[$service_name],
   }
 
-  service { $service_name :
+  service { $service_name:
     ensure     => $service_ensure_real,
     enable     => $service_enable_real,
     hasrestart => $service_hasrestart,
