@@ -65,7 +65,7 @@ class func (
 #  require smolt
   Class['certmaster'] -> Class['func']
 
-  package { $package_name :
+  package { $package_name:
     ensure  => $package_ensure,
   }
 
