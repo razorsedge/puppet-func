@@ -49,11 +49,11 @@
 #     use_puppet_certs => true,
 #   }
 #
-# === Authors
+# === Authors:
 #
 # Mike Arnold <mike@razorsedge.org>
 #
-# === Copyright
+# === Copyright:
 #
 # Copyright (C) 2012 Mike Arnold, unless otherwise noted.
 #

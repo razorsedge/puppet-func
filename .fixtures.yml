@@ -1,6 +1,8 @@
 fixtures:
   repositories:
-    stdlib: git://github.com/puppetlabs/puppetlabs-stdlib.git
-    certmaster: git://github.com/razorsedge/puppet-certmaster.git
+    stdlib:
+      repo: "git://github.com/puppetlabs/puppetlabs-stdlib.git"
+      ref: "2.6.0"
+    certmaster: "git://github.com/razorsedge/puppet-certmaster.git"
   symlinks:
     func: "#{source_dir}"
