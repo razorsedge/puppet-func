@@ -79,6 +79,11 @@ TODO
 * Add firewall support.
 * Make the Puppet client determine $puppetmaster_ssl_dir.
 
+Contributing
+------------
+
+Please see DEVELOP.md for contribution information.
+
 License
 -------
 
