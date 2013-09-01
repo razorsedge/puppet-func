@@ -26,39 +26,48 @@ Class documentation is available via puppetdoc.
 Examples
 --------
 
-    # Top Scope variable (i.e. via Dashboard):
-    $certmaster_use_puppet_certs = true
-    $func_use_puppet_certs = true
-    # Change SSL dir for Puppet Enterprise.
-    $func_puppetmaster_ssl_dir = '/etc/puppetlabs/puppet'
-    include 'certmaster'
-    include 'func::minion'
+Top Scope variable (i.e. via Dashboard):
 
+```Puppet
+$certmaster_use_puppet_certs = true
+$func_use_puppet_certs = true
+# Change SSL dir for Puppet Enterprise.
+$func_puppetmaster_ssl_dir = '/etc/puppetlabs/puppet'
 
-    # Parameterized Class:
-    # minions
-    node default {
-      class { 'certmaster':
-        use_puppet_certs => true,
-      }
-      class { 'func::minion':
-        use_puppet_certs => true,
-      }
-    }
+include 'certmaster'
+include 'func::minion'
+```
 
-    # overlord
-    node 'overlord.example.com' {
-      class { 'certmaster':
-        use_puppet_certs => true,
-      }
-      class { 'func::minion':
-        use_puppet_certs => true,
-      }
-      class { 'func::overlord':
-        use_puppet_certs => true,
-      }
-    }
+Parameterized Class:
 
+* minions
+
+```Puppet
+node default {
+  class { 'certmaster':
+    use_puppet_certs => true,
+  }
+  class { 'func::minion':
+    use_puppet_certs => true,
+  }
+}
+```
+
+* overlord
+
+```Puppet
+node 'overlord.example.com' {
+  class { 'certmaster':
+    use_puppet_certs => true,
+  }
+  class { 'func::minion':
+    use_puppet_certs => true,
+  }
+  class { 'func::overlord':
+    use_puppet_certs => true,
+  }
+}
+```
 
 Notes
 -----
