@@ -8,10 +8,10 @@ socket_timeout = 0
 backend = conf
 group_db =
 delegate = False
-<% if use_puppet_certs -%>
+<% if @use_puppet_certs -%>
 puppet_minions = True
-ca_file = <%= puppetmaster_ssl_dir %>/ssl/certs/ca.pem
-crl_location = <%= puppetmaster_ssl_dir %>/ssl/crl.pem
-cert_file = <%= puppetmaster_ssl_dir %>/ssl/certs/ca.pem
-key_file = <%= puppetmaster_ssl_dir %>/ssl/ca/ca_key.pem
+ca_file = <%= @puppetmaster_ssl_dir %>/ssl/certs/ca.pem
+crl_location = <%= @puppetmaster_ssl_dir %>/ssl/crl.pem
+cert_file = <%= @puppetmaster_ssl_dir %>/ssl/certs/ca.pem
+key_file = <%= @puppetmaster_ssl_dir %>/ssl/ca/ca_key.pem
 <% end %>
