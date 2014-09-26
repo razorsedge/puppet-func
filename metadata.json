@@ -16,10 +16,6 @@
     {
       "name": "puppetlabs/stdlib",
       "version_requirement": ">=2.1.0"
-    },
-    {
-      "name": "stahnma/epel",
-      "version_requirement": ">=0.0.3"
     }
   ],
   "operatingsystem_support": [
