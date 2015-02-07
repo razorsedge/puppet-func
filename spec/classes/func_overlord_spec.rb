@@ -32,7 +32,7 @@ describe 'func::overlord', :type => 'class' do
       :group  => 'root'
     )}
     it 'should contain File[/etc/func/overlord.conf] with contents "# configuration for overlord"' do
-      verify_contents(subject, '/etc/func/overlord.conf', [ '# configuration for overlord', ])
+      verify_contents(catalogue, '/etc/func/overlord.conf', [ '# configuration for overlord', ])
     end
     # TODO: negate verify_contents
     it { should_not contain_file('/etc/func/overlord.conf').with_content(/^puppet_minions = True$/) }
@@ -68,7 +68,7 @@ describe 'func::overlord', :type => 'class' do
       }
       end
       it 'should contain File[/etc/func/overlord.conf] with contents "ca_file = /var/lib/puppet/ssl/certs/ca.pem"' do
-        verify_contents(subject, '/etc/func/overlord.conf', [
+        verify_contents(catalogue, '/etc/func/overlord.conf', [
           'puppet_minions = True',
           'ca_file = /var/lib/puppet/ssl/certs/ca.pem',
           'crl_location = /var/lib/puppet/ssl/crl.pem',
@@ -85,7 +85,7 @@ describe 'func::overlord', :type => 'class' do
       }
       end
       it 'should contain File[/etc/func/overlord.conf] with contents "ca_file = /etc/puppetlabs/puppet/ssl/certs/ca.pem"' do
-        verify_contents(subject, '/etc/func/overlord.conf', [
+        verify_contents(catalogue, '/etc/func/overlord.conf', [
           'puppet_minions = True',
           'ca_file = /etc/puppetlabs/puppet/ssl/certs/ca.pem',
           'crl_location = /etc/puppetlabs/puppet/ssl/crl.pem',
