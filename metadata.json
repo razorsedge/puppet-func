@@ -1,9 +1,9 @@
 {
   "name": "razorsedge-func",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "author": "razorsedge",
-  "summary": "A secure, scriptable remote control framework and API.  Func allows for running commands on remote systems in a secure way, like SSH, but offers several improvements.",
-  "license": "Apache License, Version 2.0",
+  "summary": "A secure, scriptable, remote control framework and API. Func allows for running commands on remote systems in a secure way, but better than SSH.",
+  "license": "Apache-2.0",
   "project_page": "https://github.com/razorsedge/puppet-func",
   "issues_url": "https://github.com/razorsedge/puppet-func/issues",
   "source": "https://github.com/razorsedge/puppet-func.git",
@@ -11,11 +11,11 @@
   "dependencies": [
     {
       "name": "razorsedge/certmaster",
-      "version_requirement": ">=1.0.0"
+      "version_requirement": ">=1.0.0 <2.0.0"
     },
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">=2.1.0"
+      "version_requirement": ">=2.1.0 <5.0.0"
     }
   ],
   "operatingsystem_support": [
@@ -38,12 +38,8 @@
   ],
   "requirements": [
     {
-      "name": "pe",
-      "version_requirement": "3.x"
-    },
-    {
       "name": "puppet",
-      "version_requirement": ">=2.7.20 <4.0.0"
+      "version_requirement": ">=2.7.20 <5.0.0"
     }
   ]
 }

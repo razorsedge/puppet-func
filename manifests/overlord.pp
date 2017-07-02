@@ -99,10 +99,10 @@ class func::overlord (
   Class['func'] -> Class['func::overlord']
 
   file { $group_file_name:
-    ensure  => $file_ensure,
-    mode    => '0644',
-    owner   => 'root',
-    group   => 'root',
+    ensure => $file_ensure,
+    mode   => '0644',
+    owner  => 'root',
+    group  => 'root',
     # TODO: autopopulate the func group file.
     #source  => 'puppet:///modules/func/group',
 #    require => Package[$package_name],
