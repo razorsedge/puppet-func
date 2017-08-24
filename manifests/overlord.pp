@@ -90,7 +90,7 @@ class func::overlord (
   }
 
   if ! defined(Class['func']) {
-    class { 'func':
+    class { '::func':
       ensure       => $ensure,
       autoupgrade  => $autoupgrade,
       package_name => $package_name,
